@@ -72,7 +72,7 @@ define : gopher-read client-socket
             . #f
             . selector
         {(char=? prev #\return) and (char=? next #\newline)}
-          string-drop
+          string-drop-right
             string-append selector : string next
             . 2
         else
