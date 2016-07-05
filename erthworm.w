@@ -14,7 +14,6 @@ define link-types
     html      . "h"
     directory . "1"
     text      . "0"
-    error     . "3"
     binary    . "9"
     gif       . "g"
     image     . "I"
@@ -34,6 +33,8 @@ define : sopher->string sopher
           match line-def
             : 'info str
               tabulate (string-append "i" str) "fake" "(NULL)" "0"
+            : 'error str
+              tabulate (string-append "3" str) "fake" "(NULL)" "0"
             : (? link-type-sym? sym) str selector host (? number? port)
               tabulate
                 string-append (link-type-sym->string sym) str
