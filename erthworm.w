@@ -50,9 +50,16 @@ define-record-type <client>
 define* : gopher-open #:key (port 70)
   let : : server-socket : socket PF_INET SOCK_STREAM 0
     begin
+      display
+        string-append
+          . "Opening server on port "
+          . (number->string port)
+          . "... "
       setsockopt server-socket SOL_SOCKET SO_REUSEADDR 1
       bind server-socket AF_INET INADDR_ANY port
       listen server-socket 5
+      display "okay."
+      newline
       . server-socket
 
 define : gopher-accept server-socket
@@ -61,7 +68,16 @@ define : gopher-accept server-socket
       :
         client-addr   : cdr client-connection
         client-socket : car client-connection
-      make-client client-socket client-addr
+      begin
+        display
+          string-append
+            . "Connection from "
+            inet-ntop
+              . AF_INET
+              sockaddr:addr client-addr
+            . "."
+        newline
+        make-client client-socket client-addr
 
 define : gopher-read client-socket
   let loop : (selector "") (prev #\space)

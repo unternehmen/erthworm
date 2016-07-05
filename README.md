@@ -1,9 +1,9 @@
-# What is `erthworm`?
-`erthworm` is a Guile 2.0 library for creating and running single-threaded
+# What is erthworm?
+erthworm is a Guile 2.0 library for creating and running single-threaded
 Gopher servers.  It is modeled after the HTTP web server that is included
 in the Guile standard library, but it shares no code with it.
 
-`erthworm` is written in the Wisp syntax (SRFI-119), but because Wisp is
+erthworm is written in the Wisp syntax (SRFI-119), but because Wisp is
 homoiconic with S-Expressions it can be compiled into regular Scheme code.
 To convert it, you can use any Wisp preprocessor.
 
@@ -21,9 +21,26 @@ In Wisp:
 
     run-server selector-handler '(#:port 7088)
 
+## Running a Server
+Guile doesn't search .w files for modules automatically, so you will
+need to either rename erthworm.w to "erthworm" or make a symlink called
+"erthworm" that points to erthworm.w.  On my system, I do this:
+
+    $ ln -s erthworm.w erthworm
+
+Guile must have access to both Wisp (if you are using the Wisp code
+directly) and erthworm.  To that end, you may need to execute your
+server in this way or something similar:
+
+    $ export WISPDIR=/home/user/Downloads/wisp-0.8.6  # Depending on where you have Wisp installed/downloaded.
+    $ export ERTHWORMDIR=.                            # Depending on where you have erthworm installed/downloaded.
+    $ guile-2.0 -L $WISPDIR --language=wisp -L $ERTHWORMDIR -s server.w
+
+If you following these steps, the server should start up fine.
+
 ## License
-`erthworm` is licensed under the CC0 1.0 Universal license, a copy
+erthworm is licensed under the CC0 1.0 Universal license, a copy
 of which should have come with this package. To the extent possible
 under law, I waive all copyright and related or neighboring rights to
-`erthworm`. I make no warranty about the work and disclaim liability
+erthworm. I make no warranty about the work and disclaim liability
 for all uses of the work, to the extent possible under law.
