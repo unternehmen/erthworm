@@ -1,7 +1,7 @@
 # What is erthworm?
-erthworm is a Guile 2.0 library for creating and running single-threaded
-Gopher servers.  It is modeled after the HTTP web server that is included
-in the Guile standard library, but it shares no code with it.
+erthworm is a Guile 2.0 library for creating and running single-threaded,
+dynamic Gopher servers.  It is modeled after the HTTP web server that
+is included in the Guile standard library, but it shares no code with it.
 
 erthworm is written in the Wisp syntax (SRFI-119), but because Wisp is
 homoiconic with S-Expressions it can be compiled into regular Scheme code.
@@ -37,6 +37,22 @@ server in this way or something similar:
     $ guile-2.0 -L $WISPDIR --language=wisp -L $ERTHWORMDIR -s server.w
 
 If you following these steps, the server should start up fine.
+
+## Problems
+Persistant state is currently not passed by argument to the selector
+handler, which means that maintaining any kind of server state currently
+means mutating global variables.
+
+Additionally, I have not tested whether a single client can hang the
+server by, e.g., not reading data when they're supposed to.  I need to
+thoroughly explore the reads and writes to make sure a client cannot
+simply stall all traffic in that way.
+
+There is also currently no cap on how many clients can be sitting
+in the select list, which means that file descriptors could run out if a
+bunch of people connect at once.  A better solution would be to smartly
+wait until there is room for more clients to connect before accepting
+a new one.
 
 ## License
 erthworm is licensed under the CC0 1.0 Universal license, a copy
