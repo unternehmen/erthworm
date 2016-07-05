@@ -11,9 +11,14 @@ define : tabulate . fields
 
 define link-types
   '
-    html . "h"
+    html      . "h"
     directory . "1"
-    text . "1"
+    text      . "0"
+    error     . "3"
+    binary    . "9"
+    gif       . "g"
+    image     . "I"
+    query     . "7"
 
 define : link-type-sym? obj
   pair? : assoc obj link-types
