@@ -36,7 +36,7 @@ server in this way or something similar:
     $ export ERTHWORMDIR=.                            # Depending on where you have erthworm installed/downloaded.
     $ guile-2.0 -L $WISPDIR --language=wisp -L $ERTHWORMDIR -s server.w
 
-If you following these steps, the server should start up fine.
+If you follow these steps, the server should start up fine.
 
 ## Problems
 Persistant state is currently not passed by argument to the selector
