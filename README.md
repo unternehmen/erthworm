@@ -3,9 +3,9 @@ erthworm is a Guile 2.0 library for creating and running single-threaded,
 dynamic Gopher servers.  It is modeled after the HTTP web server that
 is included in the Guile standard library, but it shares no code with it.
 
-erthworm is written in the Wisp syntax (SRFI-119), but because Wisp is
-homoiconic with S-Expressions it can be compiled into regular Scheme code.
-To convert it, you can use any Wisp preprocessor.
+erthworm is written in the Wisp syntax (SRFI-119), but because Wisp is a
+lossless transformation of S-Expressions it can be compiled into regular
+Scheme code.  To convert it, you can use any Wisp preprocessor.
 
 ## Creating a Server
 In Wisp:
